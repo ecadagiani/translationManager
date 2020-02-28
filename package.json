@@ -1,0 +1,40 @@
+{
+  "name": "translation-manager",
+  "version": "1.0.0",
+  "description": "buildTranslationsConstants.js",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ecadagiani/translationManager.git"
+  },
+  "keywords": [
+    "translation",
+    "manager",
+    "management",
+    "translations",
+    "i18n",
+    "json",
+    "simple",
+    "language",
+    "lang",
+    "locale",
+    "mulitlangual",
+    "internationalization"
+  ],
+  "author": "Eden Cadagiani <e.cadagiani@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ecadagiani/translationManager/issues"
+  },
+  "homepage": "https://github.com/ecadagiani/translationManager#readme",
+  "dependencies": {
+    "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-plugin-node": "^10.0.0"
+  }
+}

@@ -1,0 +1,51 @@
+{
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:node/recommended"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true,
+            "jsx": true
+        },
+        "sourceType": "module"
+    },
+    "globals": {
+        "withLog": "readonly",
+        "log": "readonly"
+    },
+    "rules": {
+        "no-new-func": "off",
+        "indent": [
+            "warn",
+            4
+        ],
+        "quotes": [
+            "warn",
+            "double"
+        ],
+        "semi": [
+            "warn",
+            "always"
+        ],
+        "no-multi-spaces": ["warn", { "exceptions": { "ImportDeclaration": true, "VariableDeclarator": true, "Property": true } }],
+        "no-console":"warn",
+        "prefer-template":"warn",
+        "no-cond-assign": "off",
+        "spaced-comment": ["warn", "always"],
+        "space-before-blocks": "warn",
+        "space-infix-ops": "warn",
+        "space-before-function-paren": "warn",
+        "space-in-parens": ["warn", "always", { "exceptions": ["{}", "[]", "()", "empty"] }],
+        "brace-style": ["warn", "1tbs", { "allowSingleLine": true }],
+        "no-unused-vars": ["warn", { "args": "none", "ignoreRestSiblings": true }],
+        "no-irregular-whitespace": ["error", { "skipStrings": true, "skipRegExps": true, "skipTemplates": true }],
+        "keyword-spacing": ["error", { "before": true, "after": true }]
+    }
+}
