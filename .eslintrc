@@ -8,14 +8,6 @@
         "eslint:recommended",
         "plugin:node/recommended"
     ],
-    "parser": "babel-eslint",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "experimentalObjectRestSpread": true,
-            "jsx": true
-        },
-        "sourceType": "module"
-    },
     "globals": {
         "withLog": "readonly",
         "log": "readonly"
