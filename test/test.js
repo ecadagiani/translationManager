@@ -5,8 +5,10 @@ const translations       = require( "../translationsExample/translations" );
 
 TranslationManager.initData( languageCodes, translations );
 TranslationManager.setAppLanguage( "en" );
-if ( process.env.REACT_APP_ENV !== "prod" )
-    TranslationManager.verifyJson({ redundantCheck: false });
 
-const testMessage = TranslationManager.getText( textCodes.VALUE );
-console.log( testMessage );
+
+const addText = TranslationManager.getText( textCodes.ADD );
+const categoryText = TranslationManager.getText( textCodes.CATEGORY );
+console.log({addText, categoryText}, addText + categoryText, `${addText} ${categoryText}` );
+TranslationManager.setAppLanguage("fr");
+console.log({addText, categoryText}, addText + categoryText, `${addText} ${categoryText}` );

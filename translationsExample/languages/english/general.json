@@ -26,10 +26,8 @@
         "value": "archived"
     },
     "BUTTON": {
-        "value": "button"
-    },
-    "BUTTONS": {
-        "value": "buttons"
+        "value": "button",
+        "plural": "buttons"
     },
     "CANCEL": {
         "value": "cancel"

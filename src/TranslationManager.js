@@ -1,4 +1,118 @@
-const _  = require( "lodash" );
+const _ = require( "lodash" );
+
+
+const textOptions = {
+    capitalize:         "capitalize",
+    capitalizeWord:     "capitalizeWord",
+    capitalizeSentence: "capitalizeSentence",
+    uppercase:          "uppercase",
+    lowercase:          "lowercase",
+};
+
+class TranslationText extends String {
+    constructor ( textCode, options ) {
+        super( textCode );
+        this.textCode = textCode;
+        this.options = options || {};
+
+        this.text = this.genText();
+
+        TranslationManager.onAppLanguageUpdate( this.onAppLanguageUpdate.bind(this) );
+    }
+
+    onAppLanguageUpdate ( language ) {
+        this.text = this.genText( language );
+    }
+
+    genText ( language ) {
+        const textCode = this.textCode;
+        let { special, option, language: optionLanguage, insertValues } = this.options;
+        const textValue = TranslationManager.getTextValue(
+            this.textCode,
+            optionLanguage || language || TranslationManager.getBestLanguageCode( language )
+        );
+
+        if ( !textValue ) {
+            console.error( `TextCode '${textCode}' not find in language '${language}'` );
+            return textCode;
+        }
+
+
+        if ( typeof special !== "string" )
+            special = "value";
+
+        let text = textValue[special];
+        if ( !text ) {
+            console.error( `'${special}' not find in TextCode '${textCode}' in language '${language}'` );
+            return textCode;
+        }
+
+        if ( insertValues ) {
+            try {
+                const compiled = _.template( text );
+                text = compiled( insertValues );
+            } catch ( e ) {
+                console.error( `error on template ${textCode} '${text}' with ${JSON.stringify( insertValues )}` );
+            }
+        }
+
+        switch ( option ) {
+        case textOptions.capitalize:
+            text = TranslationManager.capitalize( text );
+            break;
+        case textOptions.capitalizeWord:
+            text = TranslationManager.capitalizeWord( text );
+            break;
+        case textOptions.capitalizeSentence:
+            text = TranslationManager.capitalizeSentence( text );
+            break;
+        case textOptions.uppercase:
+            text = text.toLocaleUpperCase( language );
+            break;
+        case textOptions.lowercase:
+            text = text.toLocaleLowerCase( language );
+            break;
+        default:
+            break;
+        }
+
+        return text;
+    }
+
+
+    [Symbol.toPrimitive] () {
+        return this.text;
+    }
+    toString () {
+        return this.text;
+    }
+    valueOf () {
+        return this.text;
+    }
+
+
+    static capitalize ( str ) {
+        return str.charAt( 0 ).toUpperCase() + str.slice( 1 ).toLowerCase();
+    }
+
+    static capitalizeWord ( str ) {
+        return str.toLowerCase().split( " " )
+            .map( word => TranslationText.capitalize( word ))
+            .join( " " );
+    }
+
+    static capitalizeSentence ( str ) {
+        return str.toLowerCase().split( ". " )
+            .map( word => TranslationText.capitalize( word ))
+            .join( ". " );
+    }
+
+}
+
+
+
+
+
 
 
 let appLanguage = "en";
@@ -30,10 +144,36 @@ class TranslationManager {
             return appLanguage;
     }
 
-    static setAppLanguage ( language ) {
-        appLanguage = language;
+    static getAppLanguage () {
+        return appLanguage;
     }
 
+    static setAppLanguage ( language ) {
+        appLanguage = language;
+        ( TranslationManager._appLanguageUpdateObservers || []).forEach(( handler ) => {
+            handler( language );
+        });
+    }
+
+    static onAppLanguageUpdate ( handler ) {
+        if ( !Array.isArray( TranslationManager._appLanguageUpdateObservers ))
+            TranslationManager._appLanguageUpdateObservers = [];
+        TranslationManager._appLanguageUpdateObservers.push( handler );
+        return () => {
+            TranslationManager.removeAppLanguageUpdate( handler );
+        };
+    }
+
+    static removeAppLanguageUpdate ( handler ) {
+        if ( !Array.isArray( TranslationManager._appLanguageUpdateObservers ))
+            return;
+        const index = TranslationManager._appLanguageUpdateObservers.findIndex( x => x === handler );
+        if ( index >= 0 )
+            TranslationManager.splice( index, 1 );
+    }
+
+
+    /* Dictionnary */
     static getDictionary ( languageCode = null ) {
         if ( languageCode && TranslationManager.translations ) {
             const language = TranslationManager.translations.languages.find( x => x.codes.includes( languageCode ));
@@ -43,8 +183,6 @@ class TranslationManager {
         return null;
     }
 
-
-    /* Dictionnary */
     static getAppDictionary () {
         return TranslationManager.getDictionary( appLanguage );
     }
@@ -56,7 +194,18 @@ class TranslationManager {
 
 
     /* Text */
-    static getBestText ( textCode = null, languageCode = null ) {
+    static getBestLanguageCode ( languageCode = null ) {
+        if ( TranslationManager.languageCodes && TranslationManager.languageCodes[languageCode])
+            return languageCode;
+        if ( TranslationManager.languageCodes && TranslationManager.languageCodes[appLanguage])
+            return appLanguage;
+        if ( TranslationManager.translations && TranslationManager.translations.defaultLanguage )
+            return TranslationManager.translations.defaultLanguage;
+        return null;
+    }
+
+
+    static getTextValue ( textCode = null, languageCode = null ) {
         let dictionary = TranslationManager.getDictionary( languageCode );
         if ( dictionary && dictionary[textCode])
             return dictionary[textCode];
@@ -72,86 +221,13 @@ class TranslationManager {
         return null;
     }
 
-    static getBestLanguageCode ( languageCode = null ) {
-        if ( !TranslationManager.translations || !TranslationManager.languageCodes ) {
-            return false;
-        }
 
-        if ( TranslationManager.languageCodes && TranslationManager.languageCodes[languageCode])
-            return languageCode;
-        if ( TranslationManager.languageCodes && TranslationManager.languageCodes[appLanguage])
-            return appLanguage;
-        return TranslationManager.translations.defaultLanguage;
-    }
-
-
-    static getText ( textCode, { special, option, language, insertValues } = {}) {
+    static getText ( textCode, options ) {
         if ( !TranslationManager.translations || !TranslationManager.languageCodes ) {
             console.error( "The translations hasn't been defined: may be you've not exec initData" );
             return textCode;
         }
-
-        language = TranslationManager.getBestLanguageCode( language );
-        if ( typeof special !== "string" )
-            special = "value";
-
-        let textKey = TranslationManager.getBestText( textCode, language );
-        if ( !textKey ) {
-            console.error( `TextCode '${textCode}' not find in language '${language}'` );
-            return textCode;
-        }
-
-        let text = textKey[special];
-        if ( !text ) {
-            console.error( `'${special}' not find in TextCode '${textCode}' in language '${language}'` );
-            return textCode;
-        }
-
-        if ( insertValues ) {
-            try {
-                const compiled = _.template( text );
-                text = compiled( insertValues );
-            } catch ( e ) {
-                console.error( `error on template ${textCode} '${text}' with ${JSON.stringify( insertValues )}` );
-            }
-        }
-
-        switch ( option ) {
-        case TranslationManager.textOptions.capitalize:
-            text = TranslationManager.capitalize( text );
-            break;
-        case TranslationManager.textOptions.capitalizeWord:
-            text = TranslationManager.capitalizeWord( text );
-            break;
-        case TranslationManager.textOptions.capitalizeSentence:
-            text = TranslationManager.capitalizeSentence( text );
-            break;
-        case TranslationManager.textOptions.uppercase:
-            text = text.toLocaleUpperCase( language );
-            break;
-        case TranslationManager.textOptions.lowercase:
-            text = text.toLocaleLowerCase( language );
-            break;
-        default:
-            break;
-        }
-        return text;
-    }
-
-    static capitalize ( str ) {
-        return str.charAt( 0 ).toUpperCase() + str.slice( 1 ).toLowerCase();
-    }
-
-    static capitalizeWord ( str ) {
-        return str.toLowerCase().split( " " )
-            .map( word => TranslationManager.capitalize( word ))
-            .join( " " );
-    }
-
-    static capitalizeSentence ( str ) {
-        return str.toLowerCase().split( ". " )
-            .map( word => TranslationManager.capitalize( word ))
-            .join( ". " );
+        return new TranslationText( textCode, options );
     }
 
     static verifyJson ({ redundantCheck = true }) {
@@ -195,12 +271,6 @@ class TranslationManager {
 
 }
 
-TranslationManager.textOptions = {
-    capitalize:         "capitalize",
-    capitalizeWord:     "capitalizeWord",
-    capitalizeSentence: "capitalizeSentence",
-    uppercase:          "uppercase",
-    lowercase:          "lowercase",
-};
+TranslationManager.textOptions = textOptions;
 
 module.exports = TranslationManager;
