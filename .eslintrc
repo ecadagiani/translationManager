@@ -26,6 +26,7 @@
             "warn",
             "always"
         ],
+        "node/shebang": 0,
         "no-multi-spaces": ["warn", { "exceptions": { "ImportDeclaration": true, "VariableDeclarator": true, "Property": true } }],
         "no-console":"warn",
         "prefer-template":"warn",
