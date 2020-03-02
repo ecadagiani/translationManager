@@ -7,7 +7,8 @@ const [, , ...args] = process.argv;
 const [dirPath] = args;
 
 if ( !dirPath )
-    return new Error( "Error, no dirPath" );
+    throw new Error( "Error, no dirPath" );
 
+console.log(`start watch-translation with dirPath:${dirPath}`);
 
-shell.exec( `./buildTranslationsConstants ${dirPath} && onchange -d 1000 '${dirPath}/languages/*/*.json'  -- ./buildTranslationsConstants ${dirPath}` );
+shell.exec( `build-translations ${dirPath} && onchange -d 1000 '${dirPath}/languages/*/*.json'  -- build-translations ${dirPath}` );

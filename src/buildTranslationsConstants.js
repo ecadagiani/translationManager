@@ -7,7 +7,9 @@ const [, , ...args] = process.argv;
 const [dirPath] = args;
 
 if ( !dirPath )
-    return new Error( "Error, no dirPath" );
+    throw new Error( "Error, no dirPath" );
+
+console.log(`start build-translation with dirPath:${dirPath}`);
 
 let translations = {
     languages:       [],

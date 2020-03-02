@@ -1,15 +1,15 @@
 {
   "name": "translation-manager",
-  "version": "1.0.0",
+  "version": "1.0.15",
   "description": "buildTranslationsConstants.js",
   "main": "src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node test/test.js"
   },
   "bin": {
-    "build-translations": "./buildTranslationsConstants",
-    "clean-translations": "./cleanTranslationsConstants",
-    "watch-translations": "./watchTranslationsConstants"
+    "build-translations": "./src/buildTranslationsConstants.js",
+    "clean-translations": "./src/cleanTranslationsConstants.js",
+    "watch-translations": "./src/watchTranslationsConstants.js"
   },
   "repository": {
     "type": "git",

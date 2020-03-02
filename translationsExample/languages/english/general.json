@@ -1,0 +1,353 @@
+{
+    "ACTION": {
+        "value": "action",
+        "plural": "actions"
+    },
+    "ACTIVE": {
+        "value": "active"
+    },
+    "ADD": {
+        "value": "add"
+    },
+    "ALIAS": {
+        "value": "alias"
+    },
+    "ALL": {
+        "value": "all"
+    },
+    "APP_ID": {
+        "value": "app id"
+    },
+    "ARCHIVE": {
+        "value": "archive",
+        "plural": "archives"
+    },
+    "ARCHIVED": {
+        "value": "archived"
+    },
+    "BUTTON": {
+        "value": "button"
+    },
+    "BUTTONS": {
+        "value": "buttons"
+    },
+    "CANCEL": {
+        "value": "cancel"
+    },
+    "CATEGORY": {
+        "value": "category"
+    },
+    "CLOSE": {
+        "value": "close"
+    },
+    "CODE": {
+        "value": "code"
+    },
+    "CONTINUE": {
+        "value": "continue"
+    },
+    "COPIED_TO_CLIPBOARD": {
+        "value": "copied to clipboard"
+    },
+    "CURRENT_PASSWORD": {
+        "value": "current password"
+    },
+    "DATE": {
+        "value": "date"
+    },
+    "DATE_PICKER": {
+        "value": "calendar"
+    },
+    "DELETE": {
+        "value": "delete",
+        "interrogation": "delete?"
+    },
+    "DELETED": {
+        "value": "deleted"
+    },
+    "DELETE_ITEM": {
+        "value": "delete item"
+    },
+    "DESCRIPTION": {
+        "value": "description"
+    },
+    "DISPLAY": {
+        "value": "display"
+    },
+    "DISPLAY_ALL": {
+        "value": "display all"
+    },
+    "DUPLICATE": {
+        "value": "duplicate"
+    },
+    "EMAIL": {
+        "value": "email"
+    },
+    "EMAIL_ADDRESS": {
+        "value": "email address"
+    },
+    "END_DATE": {
+        "value": "end date"
+    },
+    "ENTER_TEXT": {
+        "value": "enter text"
+    },
+    "ENTER_TITLE": {
+        "value": "enter title"
+    },
+    "ENVIRONMENT": {
+        "value": "environment",
+        "plural": "environment"
+    },
+    "ERROR": {
+        "value": "error",
+        "plural": "errors"
+    },
+    "EVENT": {
+        "value": "event",
+        "plural": "events"
+    },
+    "EXAMPLE": {
+        "value": "example",
+        "plural": "examples"
+    },
+    "FIRST_MESSAGE": {
+        "value": "first message"
+    },
+    "FIRST_NAME": {
+        "value": "first name"
+    },
+    "FROM": {
+        "value": "from"
+    },
+    "HOME": {
+        "value": "home"
+    },
+    "HOUR": {
+        "value": "hour"
+    },
+    "ID": {
+        "value": "id"
+    },
+    "IMAGE": {
+        "value": "image"
+    },
+    "IMAGE_URL": {
+        "value": "image url"
+    },
+    "INSTANCE": {
+        "value": "instance",
+        "plural": "instances"
+    },
+    "ITEM": {
+        "value": "item",
+        "plural": "items"
+    },
+    "KEY": {
+        "value": "key"
+    },
+    "LABEL": {
+        "value": "label"
+    },
+    "LANGUAGE": {
+        "value": "language",
+        "plural": "languages"
+    },
+    "LAST_ITEM": {
+        "value": "last item"
+    },
+    "LAST_NAME": {
+        "value": "last name"
+    },
+    "LAST_UPDATE": {
+        "value": "last update"
+    },
+    "LEAVE": {
+        "value": "leave"
+    },
+    "LOADING": {
+        "value": "loading"
+    },
+    "LOCALE": {
+        "value": "locale"
+    },
+    "LOGIN": {
+        "value": "login"
+    },
+    "LOGOUT": {
+        "value": "logout"
+    },
+    "MANDATORY": {
+        "value": "mandatory"
+    },
+    "MESSAGE_COUNT": {
+        "value": "message count"
+    },
+    "MINUTE": {
+        "value": "minute"
+    },
+    "NAME": {
+        "value": "name"
+    },
+    "NEW_PASSWORD": {
+        "value": "new password"
+    },
+    "NO": {
+        "value": "no"
+    },
+    "NOTHING_HAVE_CHANGED": {
+        "value": "nothing have changed"
+    },
+    "NOTHING_TO_SAVE": {
+        "value": "nothing to save"
+    },
+    "NO_OPTION_AVAILABLE": {
+        "value": "no option available"
+    },
+    "OK": {
+        "value": "ok"
+    },
+    "OOOOPS": {
+        "value": "ooooops"
+    },
+    "OVERWRITE": {
+        "value": "overwrite"
+    },
+    "PASSWORD": {
+        "value": "password"
+    },
+    "PERMISSIONS": {
+        "value": "permissions"
+    },
+    "POSITION": {
+        "value": "position"
+    },
+    "PRIORITY": {
+        "value": "priority"
+    },
+    "PROFILE": {
+        "value": "profile",
+        "plural": "profiles"
+    },
+    "QUIT": {
+        "value": "quit"
+    },
+    "QUIT_PAGE": {
+        "value": "quit page"
+    },
+    "REDIRECT": {
+        "value": "redirect"
+    },
+    "REGEX": {
+        "value": "regex"
+    },
+    "REMEMBER_ME": {
+        "value": "remember me"
+    },
+    "RENEW": {
+        "value": "renew"
+    },
+    "RETURN_TO_PAGINATION": {
+        "value": "return to pagination"
+    },
+    "SAVE": {
+        "value": "save"
+    },
+    "SEARCH": {
+        "value": "search..."
+    },
+    "SELECT": {
+        "value": "select"
+    },
+    "SENTENCE": {
+        "value": "sentence",
+        "plural": "sentences"
+    },
+    "SESSION_DURATION": {
+        "value": "session duration"
+    },
+    "SETTING": {
+        "value": "setting",
+        "plural": "settings"
+    },
+    "SILENCE": {
+        "value": "silence"
+    },
+    "START_DATE": {
+        "value": "start date"
+    },
+    "STATUS": {
+        "value": "status"
+    },
+    "SUBJECT": {
+        "value": "subject"
+    },
+    "SUBTITLE": {
+        "value": "subtitle"
+    },
+    "TAP_TO_SEARCH": {
+        "value": "tap to search..."
+    },
+    "TEXT": {
+        "value": "text"
+    },
+    "THEME": {
+        "value": "theme"
+    },
+    "TITLE": {
+        "value": "title"
+    },
+    "TO": {
+        "value": "to"
+    },
+    "TOKEN": {
+        "value": "token"
+    },
+    "TRANSLATE": {
+        "value": "translate"
+    },
+    "TRANSLATE_ALL": {
+        "value": "translate all"
+    },
+    "TRANSLATION_FAILED": {
+        "value": "the translation failed"
+    },
+    "TRANSLATION_SUCCESS": {
+        "value": "successful translation"
+    },
+    "TYPE": {
+        "value": "type"
+    },
+    "UNDEFINED": {
+        "value": "undefined"
+    },
+    "UPDATE": {
+        "value": "update"
+    },
+    "UPDATE_PASSWORD": {
+        "value": "update password"
+    },
+    "UP_TO_DATE": {
+        "value": "up to date"
+    },
+    "URL": {
+        "value": "url"
+    },
+    "USER": {
+        "value": "user",
+        "plural": "users"
+    },
+    "VALIDATE": {
+        "value": "validate"
+    },
+    "VALUE": {
+        "value": "value",
+        "plural": "values"
+    },
+    "VISIBILITY": {
+        "value": "visibility"
+    },
+    "YES": {
+        "value": "yes"
+    }
+}

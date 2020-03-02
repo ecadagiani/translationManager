@@ -8,8 +8,9 @@ const [, , ...args] = process.argv;
 const [dirPath, baseFolderName = " english", organizeOtherLanguageLikeBase = true, minimizeValueCase = false] = args;
 
 if ( !dirPath )
-    return new Error( "Error, no dirPath" );
+    throw new Error( "Error, no dirPath" );
 
+console.log(`start clean-translation with baseName:${baseFolderName}, organizeOtherLanguageLikeBase: ${organizeOtherLanguageLikeBase} and minimizeValueCase: ${minimizeValueCase}`);
 
 function updateValuesInDeep ( object, updater = null ) {
     if ( typeof object !== "object" ) return object;

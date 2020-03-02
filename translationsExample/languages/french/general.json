@@ -1,0 +1,352 @@
+{
+    "ACTION": {
+        "value": "action",
+        "plural": "actions"
+    },
+    "ACTIVE": {
+        "value": "actif"
+    },
+    "ADD": {
+        "value": "ajouter"
+    },
+    "ALIAS": {
+        "value": "alias"
+    },
+    "ALL": {
+        "value": "tous"
+    },
+    "APP_ID": {
+        "value": "app id"
+    },
+    "ARCHIVE": {
+        "value": "archive",
+        "plural": "archives"
+    },
+    "ARCHIVED": {
+        "value": "archivé"
+    },
+    "BUTTON": {
+        "value": "bouton"
+    },
+    "BUTTONS": {
+        "value": "boutons"
+    },
+    "CANCEL": {
+        "value": "annuler"
+    },
+    "CATEGORY": {
+        "value": "catégorie"
+    },
+    "CLOSE": {
+        "value": "fermer"
+    },
+    "CODE": {
+        "value": "code"
+    },
+    "CONTINUE": {
+        "value": "continuer"
+    },
+    "COPIED_TO_CLIPBOARD": {
+        "value": "copié dans le presse-papier"
+    },
+    "CURRENT_PASSWORD": {
+        "value": "mot de passe actuel"
+    },
+    "DATE": {
+        "value": "date"
+    },
+    "DATE_PICKER": {
+        "value": "calendrier"
+    },
+    "DELETE": {
+        "value": "effacer",
+        "interrogation": "effacer?"
+    },
+    "DELETED": {
+        "value": "effacé"
+    },
+    "DELETE_ITEM": {
+        "value": "supprimer l'objet"
+    },
+    "DESCRIPTION": {
+        "value": "description"
+    },
+    "DISPLAY": {
+        "value": "affichage"
+    },
+    "DISPLAY_ALL": {
+        "value": "afficher tout"
+    },
+    "DUPLICATE": {
+        "value": "copie"
+    },
+    "EMAIL": {
+        "value": "email"
+    },
+    "EMAIL_ADDRESS": {
+        "value": "adresse e-mail"
+    },
+    "END_DATE": {
+        "value": "date de fin"
+    },
+    "ENTER_TEXT": {
+        "value": "entrer texte"
+    },
+    "ENTER_TITLE": {
+        "value": "entrer un titre"
+    },
+    "ENVIRONMENT": {
+        "value": "environnement",
+        "plural": "environnements"
+    },
+    "ERROR": {
+        "value": "erreur"
+    },
+    "EVENT": {
+        "value": "evénement",
+        "plural": "evénements"
+    },
+    "EXAMPLE": {
+        "value": "exemple",
+        "plural": "exemples"
+    },
+    "FIRST_MESSAGE": {
+        "value": "premier message"
+    },
+    "FIRST_NAME": {
+        "value": "prénom"
+    },
+    "FROM": {
+        "value": "de"
+    },
+    "HOME": {
+        "value": "accueil"
+    },
+    "HOUR": {
+        "value": "heure"
+    },
+    "ID": {
+        "value": "id"
+    },
+    "IMAGE": {
+        "value": "image"
+    },
+    "IMAGE_URL": {
+        "value": "url de l'image"
+    },
+    "INSTANCE": {
+        "value": "instance",
+        "plural": "instances"
+    },
+    "ITEM": {
+        "value": "objet",
+        "plural": "objets"
+    },
+    "KEY": {
+        "value": "clé"
+    },
+    "LABEL": {
+        "value": "label"
+    },
+    "LANGUAGE": {
+        "value": "language",
+        "plural": "languages"
+    },
+    "LAST_ITEM": {
+        "value": "dernier objet"
+    },
+    "LAST_NAME": {
+        "value": "nom"
+    },
+    "LAST_UPDATE": {
+        "value": "dernière mise à jour"
+    },
+    "LEAVE": {
+        "value": "quitter"
+    },
+    "LOADING": {
+        "value": "chargement"
+    },
+    "LOCALE": {
+        "value": "locale"
+    },
+    "LOGIN": {
+        "value": "connexion"
+    },
+    "LOGOUT": {
+        "value": "déconnexion"
+    },
+    "MANDATORY": {
+        "value": "obligatoire"
+    },
+    "MESSAGE_COUNT": {
+        "value": "nombre de messages"
+    },
+    "MINUTE": {
+        "value": "minute"
+    },
+    "NAME": {
+        "value": "nom"
+    },
+    "NEW_PASSWORD": {
+        "value": "nouveau mot de passe"
+    },
+    "NO": {
+        "value": "non"
+    },
+    "NOTHING_HAVE_CHANGED": {
+        "value": "rien n'a changé"
+    },
+    "NOTHING_TO_SAVE": {
+        "value": "rien à sauvegarder"
+    },
+    "NO_OPTION_AVAILABLE": {
+        "value": "pas d'option disponible"
+    },
+    "OK": {
+        "value": "ok"
+    },
+    "OOOOPS": {
+        "value": "ooooops"
+    },
+    "OVERWRITE": {
+        "value": "ecraser"
+    },
+    "PASSWORD": {
+        "value": "mot de passe"
+    },
+    "PERMISSIONS": {
+        "value": "permissions"
+    },
+    "POSITION": {
+        "value": "position"
+    },
+    "PRIORITY": {
+        "value": "priorité"
+    },
+    "PROFILE": {
+        "value": "profil",
+        "plural": "profils"
+    },
+    "QUIT": {
+        "value": "quitter"
+    },
+    "QUIT_PAGE": {
+        "value": "quitter la page"
+    },
+    "REDIRECT": {
+        "value": "redirection"
+    },
+    "REGEX": {
+        "value": "regex"
+    },
+    "REMEMBER_ME": {
+        "value": "ce souvenir de moi"
+    },
+    "RENEW": {
+        "value": "ré-enregistrer"
+    },
+    "RETURN_TO_PAGINATION": {
+        "value": "retour à la pagination"
+    },
+    "SAVE": {
+        "value": "sauvegarder"
+    },
+    "SEARCH": {
+        "value": "rechercher..."
+    },
+    "SELECT": {
+        "value": "sélectionner"
+    },
+    "SENTENCE": {
+        "value": "phrase",
+        "plural": "phrases"
+    },
+    "SESSION_DURATION": {
+        "value": "durée de session"
+    },
+    "SETTING": {
+        "value": "réglage",
+        "plural": "réglages"
+    },
+    "SILENCE": {
+        "value": "silence"
+    },
+    "START_DATE": {
+        "value": "date de début"
+    },
+    "STATUS": {
+        "value": "statut"
+    },
+    "SUBJECT": {
+        "value": "sujet"
+    },
+    "SUBTITLE": {
+        "value": "sous titre"
+    },
+    "TAP_TO_SEARCH": {
+        "value": "saisir pour rechercher..."
+    },
+    "TEXT": {
+        "value": "texte"
+    },
+    "THEME": {
+        "value": "thème"
+    },
+    "TITLE": {
+        "value": "titre"
+    },
+    "TO": {
+        "value": "à"
+    },
+    "TOKEN": {
+        "value": "token"
+    },
+    "TRANSLATE": {
+        "value": "traduire"
+    },
+    "TRANSLATE_ALL": {
+        "value": "traduire tout"
+    },
+    "TRANSLATION_FAILED": {
+        "value": "la traduction a échoué"
+    },
+    "TRANSLATION_SUCCESS": {
+        "value": "traduction réussie"
+    },
+    "TYPE": {
+        "value": "type"
+    },
+    "UNDEFINED": {
+        "value": "non défini"
+    },
+    "UPDATE": {
+        "value": "modifier"
+    },
+    "UPDATE_PASSWORD": {
+        "value": "modifier le mot de passe"
+    },
+    "UP_TO_DATE": {
+        "value": "a jour"
+    },
+    "URL": {
+        "value": "lien"
+    },
+    "USER": {
+        "value": "utilisateur",
+        "plural": "utilisateurs"
+    },
+    "VALIDATE": {
+        "value": "valider"
+    },
+    "VALUE": {
+        "value": "valeur",
+        "plural": "valeurs"
+    },
+    "VISIBILITY": {
+        "value": "visibilité"
+    },
+    "YES": {
+        "value": "oui"
+    }
+}

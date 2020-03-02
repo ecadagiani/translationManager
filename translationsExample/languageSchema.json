@@ -1,0 +1,53 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Languages Text",
+  "description": "All text in one language for front of HelloMyBot Project",
+  "type": "object",
+  "properties": {
+    "codes": {
+      "description": "Array of language code",
+      "type": "array",
+      "items": {
+        "description": "The language code, defined in https://www.ietf.org/rfc/bcp/bcp47.txt",
+        "type": "string"
+      }
+    },
+    "dictionary": {
+      "description": "The dictionary, it contains multiple keys, and the traduction for these keys in the parent language",
+      "type": "object",
+      "properties": {
+        "/": {}
+      },
+      "patternProperties": {
+        "^([A-Z]|_|[0-9])+$": {
+          "description": "An item of dictionary, it has contain a value key with the string in the parent language, and it can contains other key for other traduction, example:\"plural\"",
+          "type": "object",
+          "properties": {
+            "/": {}
+          },
+          "required": [
+            "value"
+          ],
+          "patternProperties": {
+            "^[a-z]+$": {
+              "anyOf": [
+                {
+                  "type": "string"
+                },
+                {
+                  "type": "object"
+                }
+              ]
+            }
+          },
+          "additionalItems": false
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "required": [
+    "codes",
+    "dictionary"
+  ]
+}
