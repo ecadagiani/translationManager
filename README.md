@@ -290,7 +290,7 @@ TranslationManager.getText(textCode.AN_ERROR_OCCURRED, {insertValues: {errorMess
 
 
 ## Authors
-- **Eden Cadagiani** pour [HelloMyBot](https://hellomybot.io/fr/bienvenue/)
+- **Eden Cadagiani** for [HelloMyBot](https://hellomybot.io/fr/bienvenue/)
 
 
 
