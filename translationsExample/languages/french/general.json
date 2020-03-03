@@ -33,7 +33,8 @@
         "value": "annuler"
     },
     "CATEGORY": {
-        "value": "catégorie"
+        "value": "catégorie",
+        "plural": "catégories"
     },
     "CLOSE": {
         "value": "fermer"

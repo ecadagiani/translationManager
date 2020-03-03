@@ -33,7 +33,8 @@
         "value": "cancel"
     },
     "CATEGORY": {
-        "value": "category"
+        "value": "category",
+        "plural": "categories"
     },
     "CLOSE": {
         "value": "close"

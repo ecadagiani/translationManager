@@ -1,117 +1,83 @@
-const _ = require( "lodash" );
+const _                         = require( "lodash" );
+const { textOptions, genText } = require( "./tools" );
 
-
-const textOptions = {
-    capitalize:         "capitalize",
-    capitalizeWord:     "capitalizeWord",
-    capitalizeSentence: "capitalizeSentence",
-    uppercase:          "uppercase",
-    lowercase:          "lowercase",
-};
 
 class TranslationText extends String {
     constructor ( textCode, options ) {
         super( textCode );
         this.textCode = textCode;
-        this.options = options || {};
-
-        this.text = this.genText();
-
-        TranslationManager.onAppLanguageUpdate( this.onAppLanguageUpdate.bind(this) );
+        this.options = {};
+        this.text = "";
+        this.setOptions( options );
     }
 
-    onAppLanguageUpdate ( language ) {
-        this.text = this.genText( language );
+
+    _onAppLanguageUpdate ( language ) {
+        this.updateText( language );
     }
 
-    genText ( language ) {
-        const textCode = this.textCode;
+    /**
+     * change the internal options of the text
+     * @param options {Object}
+     * @param [options.special="value"] {string} - the special value from the textCode to use
+     * @param [options.option] {string} - an constant string (TranslationManager.textOptions=[capitalize,capitalizeWord,capitalizeSentence,uppercase,lowercase])
+     * @param [options.language=appLanguage] {string} - to force language
+     * @param [options.insertValues] {Object} - an object of insert value {key: value}, in the translation text, you have to add ${<key>}
+     */
+    setOptions ( options ) {
+        this.options = options || {};
+        if ( !options.language ) {
+            this.unregisterOnLanguageUpdate = TranslationManager.onAppLanguageUpdate( this._onAppLanguageUpdate.bind( this ));
+        } else if ( this.unregisterOnLanguageUpdate ) {
+            this.unregisterOnLanguageUpdate();
+        }
+        this.updateText();
+    }
+
+    /**
+     * to destroy the current text, and unsubscribe current text to the app language change event. And avoid memory leaks
+     */
+    destroy () {
+        if ( this.unregisterOnLanguageUpdate ) {
+            this.unregisterOnLanguageUpdate();
+        }
+    }
+
+    /**
+     * to force update the internal text
+     * @param [language] {string}
+     */
+    updateText ( language ) {
+        const textCode                                                  = this.textCode;
         let { special, option, language: optionLanguage, insertValues } = this.options;
-        const textValue = TranslationManager.getTextValue(
-            this.textCode,
-            optionLanguage || language || TranslationManager.getBestLanguageCode( language )
-        );
+        const _language                                                 = TranslationManager.getBestLanguageCode( optionLanguage || language );
+        const textValue                                                 = TranslationManager.getTextValue( this.textCode, language );
 
-        if ( !textValue ) {
-            console.error( `TextCode '${textCode}' not find in language '${language}'` );
-            return textCode;
+        let text = textCode;
+        try {
+            text = genText( textValue, { special, option, language: _language, insertValues }, textCode );
+        } catch ( e ) {
+            console.error( e );
         }
 
-
-        if ( typeof special !== "string" )
-            special = "value";
-
-        let text = textValue[special];
-        if ( !text ) {
-            console.error( `'${special}' not find in TextCode '${textCode}' in language '${language}'` );
-            return textCode;
-        }
-
-        if ( insertValues ) {
-            try {
-                const compiled = _.template( text );
-                text = compiled( insertValues );
-            } catch ( e ) {
-                console.error( `error on template ${textCode} '${text}' with ${JSON.stringify( insertValues )}` );
-            }
-        }
-
-        switch ( option ) {
-        case textOptions.capitalize:
-            text = TranslationManager.capitalize( text );
-            break;
-        case textOptions.capitalizeWord:
-            text = TranslationManager.capitalizeWord( text );
-            break;
-        case textOptions.capitalizeSentence:
-            text = TranslationManager.capitalizeSentence( text );
-            break;
-        case textOptions.uppercase:
-            text = text.toLocaleUpperCase( language );
-            break;
-        case textOptions.lowercase:
-            text = text.toLocaleLowerCase( language );
-            break;
-        default:
-            break;
-        }
-
-        return text;
+        this.text = text;
     }
 
 
     [Symbol.toPrimitive] () {
         return this.text;
     }
+
+
     toString () {
         return this.text;
     }
+
+
     valueOf () {
         return this.text;
     }
-
-
-    static capitalize ( str ) {
-        return str.charAt( 0 ).toUpperCase() + str.slice( 1 ).toLowerCase();
-    }
-
-    static capitalizeWord ( str ) {
-        return str.toLowerCase().split( " " )
-            .map( word => TranslationText.capitalize( word ))
-            .join( " " );
-    }
-
-    static capitalizeSentence ( str ) {
-        return str.toLowerCase().split( ". " )
-            .map( word => TranslationText.capitalize( word ))
-            .join( ". " );
-    }
-
 }
-
-
-
-
 
 
 
@@ -123,20 +89,27 @@ let appLanguage = "en";
  * @category Tools
  */
 class TranslationManager {
+    /**
+     * To init TranslationManage
+     * @param languageCodes {Object} - the builded json
+     * @param translations {Object} - the builded json
+     */
     static initData ( languageCodes, translations ) {
         TranslationManager._languageCodes = languageCodes;
         TranslationManager._translations = translations;
     }
 
+
     static get translations () {
         return TranslationManager._translations;
     }
+
 
     static get languageCodes () {
         return TranslationManager._languageCodes;
     }
 
-    /* Languages */
+
     static getUserLanguage () {
         if ( navigator )
             return navigator.language || navigator.userLanguage;
@@ -144,9 +117,11 @@ class TranslationManager {
             return appLanguage;
     }
 
+
     static getAppLanguage () {
         return appLanguage;
     }
+
 
     static setAppLanguage ( language ) {
         appLanguage = language;
@@ -154,6 +129,7 @@ class TranslationManager {
             handler( language );
         });
     }
+
 
     static onAppLanguageUpdate ( handler ) {
         if ( !Array.isArray( TranslationManager._appLanguageUpdateObservers ))
@@ -164,6 +140,7 @@ class TranslationManager {
         };
     }
 
+
     static removeAppLanguageUpdate ( handler ) {
         if ( !Array.isArray( TranslationManager._appLanguageUpdateObservers ))
             return;
@@ -173,7 +150,6 @@ class TranslationManager {
     }
 
 
-    /* Dictionnary */
     static getDictionary ( languageCode = null ) {
         if ( languageCode && TranslationManager.translations ) {
             const language = TranslationManager.translations.languages.find( x => x.codes.includes( languageCode ));
@@ -183,9 +159,11 @@ class TranslationManager {
         return null;
     }
 
+
     static getAppDictionary () {
         return TranslationManager.getDictionary( appLanguage );
     }
+
 
     static getDefaultDictionary () {
         if ( !TranslationManager.translations ) return null;
@@ -193,7 +171,6 @@ class TranslationManager {
     }
 
 
-    /* Text */
     static getBestLanguageCode ( languageCode = null ) {
         if ( TranslationManager.languageCodes && TranslationManager.languageCodes[languageCode])
             return languageCode;
@@ -221,15 +198,36 @@ class TranslationManager {
         return null;
     }
 
-
-    static getText ( textCode, options ) {
+    /**
+     * To get an text
+     * @param textCode {string} - the textCode, can be import by textCode.json (the builded file)
+     * @param options {Object}
+     * @param [options.special="value"] {string} - the special value from the textCode to use
+     * @param [options.option] {string} - an constant string (TranslationManager.textOptions=[capitalize,capitalizeWord,capitalizeSentence,uppercase,lowercase])
+     * @param [options.language=appLanguage] {string} - to force language
+     * @param [options.insertValues] {Object} - an object of insert value {key: value}, in the translation text, you have to add ${<key>}
+     * @param [forceString = false] {boolean} - if you don't wan't an TranslationText, but just a string
+     * @return {TranslationText|string}
+     */
+    static getText ( textCode, options = {}, forceString = false ) {
         if ( !TranslationManager.translations || !TranslationManager.languageCodes ) {
             console.error( "The translations hasn't been defined: may be you've not exec initData" );
             return textCode;
         }
+        if ( forceString ) {
+            const textValue = TranslationManager.getTextValue( textCode, TranslationManager.getBestLanguageCode( options.language ));
+            return genText( textValue, options, textCode );
+        }
         return new TranslationText( textCode, options );
     }
 
+    /**
+     * To check if the translation are correct
+     * if a textcode in one language is present in all the others
+     * if one textcode is not redundant with another
+     * @param [redundantCheck=true] {boolean} - if you wan't a check on redondant textCode (two textCode with the same value, on same language)
+     * @return {boolean}
+     */
     static verifyJson ({ redundantCheck = true }) {
         if ( !TranslationManager.translations ) {
             return false;
@@ -273,4 +271,4 @@ class TranslationManager {
 
 TranslationManager.textOptions = textOptions;
 
-module.exports = TranslationManager;
+module.exports = {TranslationManager, TranslationText};
