@@ -1,6 +1,8 @@
 # translationManager
 A light, and very simple Javascript library for managing multilingual, both back and front side.
+[node Demo](https://repl.it/@ecadagiani/DemoTranslationManager)
 
+[web Demo](demoTranslationManager)
 
 ## Setup:
 
@@ -87,19 +89,6 @@ files are the compilation of the previous files.
         }
     }
     ```
-
-
-## Notes
-### TranslationManager.getText
-`TranslationManager.getText` does not actually return a string, 
-it returns an instance of the TranslationText class. TranslationText is an extends of String.
-But you can use it like a string, all the methods of the string class are available, 
-you can Jsonify, concat, split, trim...
-
-However: 
-- `typeof` return "object"
-- if you print it, in the console, it display all the object
-- >to avoid memory link, if you no longer need a text, think to do `monTexte.destroy()`
 
 
 
@@ -264,6 +253,37 @@ to force update the internal text
 ###### code:
 ```javascript
     myText.updateText(language:string = null )
+```
+
+
+
+## Notes
+### TranslationManager.getText
+`TranslationManager.getText` does not actually return a string, 
+it returns an instance of the TranslationText class. TranslationText is an extends of String.
+But you can use it like a string, all the methods of the string class are available, 
+you can Jsonify, concat, split, trim...
+
+However: 
+- `typeof` return "object"
+- if you print it, in the console, it display all the object
+- to avoid memory link, if you no longer need a text, think to do `monTexte.destroy()`
+
+### insertValues
+You can insert values in your text, translationManager use [lodash template](https://lodash.com/docs/4.17.15#template).
+In your text in json file, add `${<keyName>}`.
+When you make `getText`, specify insertValue option, example:
+```json
+{
+    "AN_ERROR_OCCURRED": {
+        "value": "an error occurred: ${errorMessage}"    
+    }   
+}
+```
+
+```javascript
+const err = new Error("foobar");
+TranslationManager.getText(textCode.AN_ERROR_OCCURRED, {insertValues: {errorMessage: err.message}});
 ```
 
 

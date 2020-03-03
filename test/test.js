@@ -8,9 +8,13 @@ TranslationManager.setAppLanguage( "en" );
 
 
 const addText      = TranslationManager.getText( textCodes.ADD );
-const categoryText = TranslationManager.getText( textCodes.CATEGORY );
-console.log({ addText, categoryText }, addText + categoryText, `${addText} ${categoryText}`, JSON.stringify({addText, categoryText}));
-TranslationManager.setAppLanguage( "fr" );
-console.log({ addText, categoryText }, addText + categoryText, `${addText} ${categoryText}`, JSON.stringify({addText, categoryText}));
+const categoryText = TranslationManager.getText( textCodes.CATEGORY, {special: "plural"} );
 
-console.log(categoryText instanceof String);
+console.log(`${addText} ${categoryText}`);
+
+TranslationManager.setAppLanguage( "fr" );
+
+console.log(`${addText} ${categoryText}`);
+
+
+console.log(addText);
