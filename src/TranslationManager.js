@@ -50,8 +50,8 @@ class TranslationText extends String {
     updateText ( language ) {
         const textCode                                                  = this.textCode;
         let { special, option, language: optionLanguage, insertValues } = this.options;
-        const _language                                                 = TranslationManager.getBestLanguageCode( optionLanguage || language );
-        const textValue                                                 = TranslationManager.getTextValue( this.textCode, language );
+        const _language                                                 = TranslationManager._getBestLanguageCode( optionLanguage || language );
+        const textValue                                                 = TranslationManager._getTextValue( this.textCode, language );
 
         let text = textCode;
         try {
@@ -150,7 +150,7 @@ class TranslationManager {
     }
 
 
-    static getDictionary ( languageCode = null ) {
+    static _getDictionary ( languageCode = null ) {
         if ( languageCode && TranslationManager.translations ) {
             const language = TranslationManager.translations.languages.find( x => x.codes.includes( languageCode ));
             if ( language )
@@ -160,18 +160,18 @@ class TranslationManager {
     }
 
 
-    static getAppDictionary () {
-        return TranslationManager.getDictionary( appLanguage );
+    static _getAppDictionary () {
+        return TranslationManager._getDictionary( appLanguage );
     }
 
 
-    static getDefaultDictionary () {
+    static _getDefaultDictionary () {
         if ( !TranslationManager.translations ) return null;
-        return TranslationManager.getDictionary( TranslationManager.translations.defaultLanguage );
+        return TranslationManager._getDictionary( TranslationManager.translations.defaultLanguage );
     }
 
 
-    static getBestLanguageCode ( languageCode = null ) {
+    static _getBestLanguageCode ( languageCode = null ) {
         if ( TranslationManager.languageCodes && TranslationManager.languageCodes[languageCode])
             return languageCode;
         if ( TranslationManager.languageCodes && TranslationManager.languageCodes[appLanguage])
@@ -182,16 +182,16 @@ class TranslationManager {
     }
 
 
-    static getTextValue ( textCode = null, languageCode = null ) {
-        let dictionary = TranslationManager.getDictionary( languageCode );
+    static _getTextValue ( textCode = null, languageCode = null ) {
+        let dictionary = TranslationManager._getDictionary( languageCode );
         if ( dictionary && dictionary[textCode])
             return dictionary[textCode];
 
-        dictionary = TranslationManager.getAppDictionary();
+        dictionary = TranslationManager._getAppDictionary();
         if ( dictionary && dictionary[textCode])
             return dictionary[textCode];
 
-        dictionary = TranslationManager.getDefaultDictionary();
+        dictionary = TranslationManager._getDefaultDictionary();
         if ( dictionary && dictionary[textCode])
             return dictionary[textCode];
 
@@ -215,7 +215,7 @@ class TranslationManager {
             return textCode;
         }
         if ( forceString ) {
-            const textValue = TranslationManager.getTextValue( textCode, TranslationManager.getBestLanguageCode( options.language ));
+            const textValue = TranslationManager._getTextValue( textCode, TranslationManager._getBestLanguageCode( options.language ));
             return genText( textValue, options, textCode );
         }
         return new TranslationText( textCode, options );
