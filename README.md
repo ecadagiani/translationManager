@@ -5,7 +5,10 @@ A light, and very simple Javascript library for managing multilingual, both back
 
 [web Demo](https://codesandbox.io/s/demotranslationmanager-um6j9)
 
+_I create an React wrapper of translationManager [here](https://github.com/ecadagiani/translationManager-react)_
+
 ## Setup:
+0. `npm i translation-manager`
 
 1. Create a folder `/translations` in your project (or copy [translationsExample](./translationsExample) from this repo)
 
@@ -18,12 +21,12 @@ A light, and very simple Javascript library for managing multilingual, both back
             - `/french`
                 - `codes.json`
                 - ...any other json file
-            - ...any other language      
-            
+            - ...any other language
+
     2.1 The files `codes.json` contains all the language codes used to target this language,
     example for english `["en","EN","en-us","en-US"]`
-    
-    2.2 Next to the `codes.json` file you can create any other json file (with the name you want), 
+
+    2.2 Next to the `codes.json` file you can create any other json file (with the name you want),
     these files will contain the translations:
     example:
      ```json
@@ -39,14 +42,14 @@ A light, and very simple Javascript library for managing multilingual, both back
             "value": "text",
             "<special>": "textSpecial"
         }
-    } 
+    }
     ```
     - you have an json-schema [here](./translationsExample/languageSchema.json)
-   
+
     - \<special\>: is any variant of your original text (plural, interrogative, ...)
-    
-3. execute this command `build-translations <path to your translations folder>`, 
-to create `languageCodes.json`, `textCodes.json`, `translations.json`. These three 
+
+3. execute this command `build-translations <path to your translations folder>`,
+to create `languageCodes.json`, `textCodes.json`, `translations.json`. These three
 files are the compilation of the previous files.
 
 4. In your project, create a file `initTranslations.js`:
@@ -54,7 +57,7 @@ files are the compilation of the previous files.
     const {TranslationManager} = require("translation-manager");
     const languageCodes        = require("translations/languageCodes");
     const translations         = require("translations/translations");
-    
+
     TranslationManager.initData( languageCodes, translations );
     TranslationManager.setAppLanguage( "en" );
     // check Error
@@ -62,19 +65,19 @@ files are the compilation of the previous files.
         TranslationManager.verifyJson({ redundantCheck: false });
     ```
     **IMPORTANT**: for webpack front app:
-    Import `initTranslations.js` in first, in the entrance file of your app. 
+    Import `initTranslations.js` in first, in the entrance file of your app.
     So that `TranslationManager.initData` always takes place before calling `TranslationManager.getText`
 
 5. Finish, you can use TranslationManager:
     ```javascript
     const {TranslationManager} = require("translation-manager");
     const textCodes = require("translations/textCodes");
-    
+
     TranslationManager.setAppLanguage( "en" );
-    
+
     const addText      = TranslationManager.getText( textCodes.ADD );
     const categoryText = TranslationManager.getText( textCodes.CATEGORY, {special: "plural"} );
-    
+
     console.log(`${addText} ${categoryText}`); // -> "add categories"
     TranslationManager.setAppLanguage( "fr" );
     console.log(addText + categoryText); // -> "ajouter catégories"
@@ -106,9 +109,9 @@ To clean your translations files (rearrange textCodes, sort them alphabetically 
 $ build-translations <path_to_your_translations_folder> <base_folder_name> <organizeOtherLanguageLikeBase> <minimizeValueCase>
 ```
 - path_to_your_translations_folder: path to the translation folder
-- base_folder_name: the name of the language folder on which all cleaning will be based. 
+- base_folder_name: the name of the language folder on which all cleaning will be based.
 textCodes of other languages will be stored in the same way as the selected language. Default is "english"
-- organizeOtherLanguageLikeBase: if you want to store textCode in the same way as the base language.  
+- organizeOtherLanguageLikeBase: if you want to store textCode in the same way as the base language.
 - minimizeValueCase: if you want to transform all value in lowerCase
 ```bash
 example:
@@ -116,7 +119,7 @@ $ build-translations ./translations english true true
 ```
 
 ### watch-translations
-To watch the change in folder translations, with this command effective, 
+To watch the change in folder translations, with this command effective,
 any changement in translations files, trigger build-translations
 ```bash
 $ watch-translations <path_to_your_translations_folder>
@@ -145,7 +148,7 @@ To get an text
     - options.language: [appLanguage] {string} to force language
     - options.insertValues: {Object} an object of insert value {key: value}, in the translation text, you have to add ${<key>}
 - forceString: [false] {boolean} if you don't wan't an TranslationText, but just a string
-###### return 
+###### return
 return an instance TranslationText or a string (if forceString = true)
 ###### code:
 ```javascript
@@ -181,9 +184,9 @@ TranslationManager.setAppLanguage( "fr" );
 #### [static] onAppLanguageUpdate
 to subscribe to the app language changement
 ###### params:
-- handler: {function} an function which takes the new language as first argument, 
+- handler: {function} an function which takes the new language as first argument,
 and which will be executed each time app language is changed
-###### return 
+###### return
 return an function to unsubscribe the handler
 ###### code:
 ```javascript
@@ -260,12 +263,12 @@ to force update the internal text
 
 ## Notes
 ### TranslationManager.getText
-`TranslationManager.getText` does not actually return a string, 
+`TranslationManager.getText` does not actually return a string,
 it returns an instance of the TranslationText class. TranslationText is an extends of String.
-But you can use it like a string, all the methods of the string class are available, 
+But you can use it like a string, all the methods of the string class are available,
 you can Jsonify, concat, split, trim...
 
-However: 
+However:
 - `typeof` return "object"
 - if you print it, in the console, it display all the object
 - to avoid memory link, if you no longer need a text, think to do `monTexte.destroy()`
@@ -277,8 +280,8 @@ When you make `getText`, specify insertValue option, example:
 ```json
 {
     "AN_ERROR_OCCURRED": {
-        "value": "an error occurred: ${errorMessage}"    
-    }   
+        "value": "an error occurred: ${errorMessage}"
+    }
 }
 ```
 
