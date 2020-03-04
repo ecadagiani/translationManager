@@ -1,1 +1,4 @@
-module.exports = require("./TranslationManager");
+const { TranslationText, TranslationManager } = require( "./TranslationManager" );
+module.exports = {
+    TranslationText, TranslationManager,
+};
