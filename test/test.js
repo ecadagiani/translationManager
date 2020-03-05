@@ -8,7 +8,7 @@ TranslationManager.setAppLanguage( "en" );
 
 
 const addText      = TranslationManager.getText( textCodes.ADD );
-const categoryText = TranslationManager.getText( textCodes.CATEGORY, {special: "plural"} );
+const categoryText = TranslationManager.getText( textCodes.CATEGORY, {option: TranslationManager.textOptions.uppercase}, true );
 
 console.log(`${addText} ${categoryText}`);
 
@@ -18,3 +18,4 @@ console.log(`${addText} ${categoryText}`);
 
 
 console.log(addText);
+console.log(categoryText);

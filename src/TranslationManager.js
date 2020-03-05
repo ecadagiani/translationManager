@@ -172,7 +172,7 @@ class TranslationManager {
 
 
     static _getBestLanguageCode ( languageCode = null ) {
-        if ( TranslationManager.languageCodes && TranslationManager.languageCodes[languageCode])
+        if ( languageCode && TranslationManager.languageCodes && TranslationManager.languageCodes[languageCode])
             return languageCode;
         if ( TranslationManager.languageCodes && TranslationManager.languageCodes[appLanguage])
             return appLanguage;
@@ -215,8 +215,9 @@ class TranslationManager {
             return textCode;
         }
         if ( forceString ) {
-            const textValue = TranslationManager._getTextValue( textCode, TranslationManager._getBestLanguageCode( options.language ));
-            return genText( textValue, options, textCode );
+            const language = TranslationManager._getBestLanguageCode( options.language );
+            const textValue = TranslationManager._getTextValue( textCode, language);
+            return genText( textValue, {...options, language}, textCode );
         }
         return new TranslationText( textCode, options );
     }
