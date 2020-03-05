@@ -146,7 +146,7 @@ class TranslationManager {
             return;
         const index = TranslationManager._appLanguageUpdateObservers.findIndex( x => x === handler );
         if ( index >= 0 )
-            TranslationManager.splice( index, 1 );
+            TranslationManager._appLanguageUpdateObservers.splice( index, 1 );
     }
 
 

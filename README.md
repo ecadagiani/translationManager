@@ -147,7 +147,9 @@ To get an text
     - options.option: {string} an constant string (TranslationManager.textOptions=[capitalize,capitalizeWord,capitalizeSentence,uppercase,lowercase])
     - options.language: [appLanguage] {string} to force language
     - options.insertValues: {Object} an object of insert value {key: value}, in the translation text, you have to add ${<key>}
-- forceString: [false] {boolean} if you don't wan't an TranslationText, but just a string
+- forceString: [false] {boolean} if you don't wan't an TranslationText, but just a string.
+The text is not subscribed to language changes, it will not change if you change the language,
+but it is the lightest solution, and there is no need to execute destroy method.
 ###### return
 return an instance TranslationText or a string (if forceString = true)
 ###### code:
