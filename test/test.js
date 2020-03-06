@@ -7,7 +7,7 @@ TranslationManager.initData( languageCodes, translations );
 TranslationManager.setAppLanguage( "en" );
 
 
-const addText      = TranslationManager.getText( textCodes.ADD );
+const addText      = TranslationManager.getText( textCodes.ADD, {}, true );
 const categoryText = TranslationManager.getText( textCodes.CATEGORY, {option: TranslationManager.textOptions.uppercase}, true );
 
 console.log(`${addText} ${categoryText}`);

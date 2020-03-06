@@ -206,20 +206,20 @@ class TranslationManager {
      * @param [options.option] {string} - an constant string (TranslationManager.textOptions=[capitalize,capitalizeWord,capitalizeSentence,uppercase,lowercase])
      * @param [options.language=appLanguage] {string} - to force language
      * @param [options.insertValues] {Object} - an object of insert value {key: value}, in the translation text, you have to add ${<key>}
-     * @param [forceString = false] {boolean} - if you don't wan't an TranslationText, but just a string
+     * @param [useDynamicText = false] {boolean} - if you want an TranslationText, not but just a string
      * @return {TranslationText|string}
      */
-    static getText ( textCode, options = {}, forceString = false ) {
+    static getText ( textCode, options = {}, useDynamicText = false ) {
         if ( !TranslationManager.translations || !TranslationManager.languageCodes ) {
             console.error( "The translations hasn't been defined: may be you've not exec initData" );
             return textCode;
         }
-        if ( forceString ) {
-            const language = TranslationManager._getBestLanguageCode( options.language );
-            const textValue = TranslationManager._getTextValue( textCode, language);
-            return genText( textValue, {...options, language}, textCode );
+        if ( useDynamicText ) {
+            return new TranslationText( textCode, options );
         }
-        return new TranslationText( textCode, options );
+        const language = TranslationManager._getBestLanguageCode( options.language );
+        const textValue = TranslationManager._getTextValue( textCode, language);
+        return genText( textValue, {...options, language}, textCode );
     }
 
     /**

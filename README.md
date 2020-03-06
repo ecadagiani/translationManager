@@ -147,14 +147,14 @@ To get an text
     - options.option: {string} an constant string (TranslationManager.textOptions=[capitalize,capitalizeWord,capitalizeSentence,uppercase,lowercase])
     - options.language: [appLanguage] {string} to force language
     - options.insertValues: {Object} an object of insert value {key: value}, in the translation text, you have to add ${<key>}
-- forceString: [false] {boolean} if you don't wan't an TranslationText, but just a string.
-The text is not subscribed to language changes, it will not change if you change the language,
-but it is the lightest solution, and there is no need to execute destroy method.
+- useDynamicText: [false] {boolean} if you want an TranslationText, not just a string.
+An TranslationText is subscribed to the language changes, it will update if you change the language,
+but be careful when you no longer need it, you must execute the destroy method.
 ###### return
 return an instance TranslationText or a string (if forceString = true)
 ###### code:
 ```javascript
-TranslationManager.getText( textCode: String, {}, forceString: boolean = false)
+TranslationManager.getText( textCode: String, {}, useDynamicText: boolean = false)
 ```
 
 
@@ -265,7 +265,7 @@ to force update the internal text
 
 ## Notes
 ### TranslationManager.getText
-`TranslationManager.getText` does not actually return a string,
+`TranslationManager.getText` with the params `useDynamicText` to true, does not actually return a string,
 it returns an instance of the TranslationText class. TranslationText is an extends of String.
 But you can use it like a string, all the methods of the string class are available,
 you can Jsonify, concat, split, trim...
