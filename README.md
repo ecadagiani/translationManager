@@ -120,8 +120,10 @@ $ build-translations ./translations english true true
 
 ### watch-translations
 To watch the change in folder translations, with this command effective,
-any changement in translations files, trigger build-translations
+any changement in translations files, trigger build-translations.
+It is necessary to install onchange.
 ```bash
+$ npm i onchange --save-dev
 $ watch-translations <path_to_your_translations_folder>
 ```
 

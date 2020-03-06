@@ -218,8 +218,14 @@ class TranslationManager {
             return new TranslationText( textCode, options );
         }
         const language = TranslationManager._getBestLanguageCode( options.language );
-        const textValue = TranslationManager._getTextValue( textCode, language);
-        return genText( textValue, {...options, language}, textCode );
+        const textValue = TranslationManager._getTextValue( textCode, language );
+        let text = textCode;
+        try {
+            text = genText( textValue, {...options, language}, textCode );
+        } catch ( e ) {
+            console.error( e );
+        }
+        return text;
     }
 
     /**

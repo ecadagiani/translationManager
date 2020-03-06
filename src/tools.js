@@ -9,7 +9,7 @@ const textOptions = {
 
 
 function genText ( textValue, { special, option, language, insertValues } = {}, textCode ) {
-    if ( typeof textValue !== "object" ) {
+    if ( !textValue || typeof textValue !== "object" ) {
         throw new Error( `TextCode '${textCode}' not find in language '${language}'` );
     }
 
