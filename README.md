@@ -106,7 +106,7 @@ $ build-translations <path_to_your_translations_folder>
 ### clean-translations
 To clean your translations files (rearrange textCodes, sort them alphabetically and can transform their case)
 ```bash
-$ build-translations <path_to_your_translations_folder> <base_folder_name> <organizeOtherLanguageLikeBase> <minimizeValueCase>
+$ clean-translations <path_to_your_translations_folder> <base_folder_name> <organizeOtherLanguageLikeBase> <minimizeValueCase>
 ```
 - path_to_your_translations_folder: path to the translation folder
 - base_folder_name: the name of the language folder on which all cleaning will be based.
@@ -115,7 +115,7 @@ textCodes of other languages will be stored in the same way as the selected lang
 - minimizeValueCase: if you want to transform all value in lowerCase
 ```bash
 example:
-$ build-translations ./translations english true true
+$ clean-translations ./translations english true true
 ```
 
 ### watch-translations

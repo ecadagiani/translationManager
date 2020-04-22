@@ -1,6 +1,6 @@
 {
   "name": "translation-manager",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "A light, and very simple Javascript library for managing multilingual, both back and front side.\n\n",
   "main": "src/index.js",
   "scripts": {
@@ -44,7 +44,7 @@
   "devDependencies": {
     "eslint": "^6.6.0",
     "eslint-plugin-node": "^10.0.0",
-    "onchange": "^6.1.0",
+    "onchange": "^6.1.1",
     "shelljs": "^0.8.3"
   }
 }
