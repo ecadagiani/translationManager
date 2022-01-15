@@ -45,6 +45,6 @@
     "eslint": "^6.6.0",
     "eslint-plugin-node": "^10.0.0",
     "onchange": "^6.1.1",
-    "shelljs": "^0.8.3"
+    "shelljs": "^0.8.5"
   }
 }
